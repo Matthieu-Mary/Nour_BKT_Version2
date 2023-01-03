@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/pages.css">
+    <title>Oxygène</title>
+  </head>
+  <body>
+    <header>
+      <div class="container-logo">
+        <img class="logo" src="../styles/img/logo.svg" alt="logo" />
+      </div>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Accueil</a></li>
+          <li><a href="./oxygene.html">Oxygène</a></li>
+          <li><a href="./temperature.html">Température</a></li>
+          <li><a href="./salinite.html">Salinité</a></li>
+          <li><a href="./turbidite.html">Turbidité</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="page">
+      <h2>Oxygène</h2>
+      <!-- Formulaire HTML pour télécharger un fichier -->
+      <form id="upload-form">
+        <input type="file" class="upload-file" />
+        <button type="submit">Télécharger</button>
+      </form>
+
+      <!-- Bouton pour télécharger le fichier nettoyé -->
+      <button id="download-button" style="display: none">
+        Télécharger le fichier nettoyé
+      </button>
+    </main>
+
+    <script src="../scripts/Oxygene.js"></script>
+  </body>
+</html>

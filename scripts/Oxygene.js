@@ -1,5 +1,5 @@
-function cleanData(data) {
-  // Appliquer des transformations et des nettoyages sur les données ici
+// Appliquer des transformations et des nettoyages sur les données ici
+function cleanOxygeneData(data) {
 
   // Filtre dans un premier temps la data par qualité
   const newDataByQuality = data.filter((item) => parseInt(item.Quality) === 1);
@@ -20,14 +20,13 @@ const uploadForm = document.getElementById("upload-form");
 // Récupérer le bouton de téléchargement..
 const downloadButton = document.getElementById("download-button");
 
-let isReady = false;
 
 // Gérer la soumission du formulaire
 uploadForm.addEventListener("submit", (event) => {
   event.preventDefault(); // Empêcher la soumission du formulaire
 
   // Récupérer le fichier téléchargé
-  const file = document.getElementById("upload-file").files[0];
+  const file = document.querySelector(".upload-file").files[0];
 
   // Vérifier que le fichier a été sélectionné
   if (!file) {
@@ -50,10 +49,8 @@ uploadForm.addEventListener("submit", (event) => {
       return;
     }
 
-    const cleanedData = cleanData(data); // Appliquer la fonction de nettoyage
+    const cleanedData = cleanOxygeneData(data); // Appliquer la fonction de nettoyage
     const cleanedDataJSON = JSON.stringify(cleanedData); // Convertir les données nettoyées en JSON
-
-    console.log(cleanedDataJSON);
 
     // Créer un lien pour télécharger le fichier nettoyé
     const link = document.createElement("a");

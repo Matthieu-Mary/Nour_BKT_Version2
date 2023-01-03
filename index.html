@@ -4,22 +4,42 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="./styles/global.css">
+    <link rel="stylesheet" href="./styles/homepage.css">
+    <title>Nettoyez vos données</title>
   </head>
+
   <body>
-    <!-- Formulaire HTML pour télécharger un fichier -->
-    <form id="upload-form">
-      <input type="file" id="upload-file" />
-      <button type="submit">Télécharger</button>
-    </form>
-
-    <!-- Bouton pour télécharger le fichier nettoyé -->
-    <button id="download-button" style="display: none">
-      Télécharger le fichier nettoyé
-    </button>
-
-
-    <script src="./scripts/script.js"></script>
-
+    <header>
+        <div class="container-logo">
+            <img class="logo" src="./styles/img/logo.svg" alt="logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="./pages/oxygene.html">Oxygène</a></li>
+                <li><a href="./pages/temperature.html">Température</a></li>
+                <li><a href="./pages/salinite.html">Salinité</a></li>
+                <li><a href="./pages/turbidite.html">Turbidité</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="home">
+          <h1>Choisissez le type de données à nettoyer :</h1>
+        <div class="card">
+          <a href="./pages/oxygene.html">Oxygène</a>
+        </div>
+        <div class="card">
+          <a href="./pages/temperature.html">Température</a>
+        </div>
+        <div class="card">
+          <a href="./pages/salinite.html">Salinité</a>
+        </div>
+        <div class="card">
+          <a href="./pages/turbi.html">Turbidité</a>
+        </div>
+      </section>
+    </main>
   </body>
 </html>

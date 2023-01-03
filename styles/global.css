@@ -1,0 +1,59 @@
+*, ::before, ::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Variantes de bleu du plus clair au plus fonçé */
+    --color-1: #04BBFF; /* Pour les Background */
+    --color-2: #0594D0; /* Pour les Titres */
+    --color-3: #007198; /* Pour les Liens */
+    --color-4: #003C57; /* Pour les Textes */
+    --color-5: #051C24; /* Pour les Titres */
+}
+
+html, body {
+    background-color: #f1f1f1;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-3);
+}
+
+h1, h2, h3, h4 {
+    color: var(--color-5);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+}
+
+nav {
+    display: flex;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+}
+
+nav ul li {
+    margin: 0 12px;
+}
+
+nav ul li a:hover {
+    opacity: 0.8;
+}
+
+.logo {
+    width: 2.5rem;
+    height: 3rem;
+}
+
+
+
