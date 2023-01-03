@@ -46,8 +46,16 @@ nav ul li {
     margin: 0 12px;
 }
 
+nav ul li a {
+    padding: 8px;
+}
+
 nav ul li a:hover {
     opacity: 0.8;
+}
+
+.active {
+    border-bottom: 2px solid var(--color-3);
 }
 
 .logo {

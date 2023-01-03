@@ -7,7 +7,6 @@ function cleanTemperatureData(data) {
     //   Puis par valeur (ici la température)
     const finalData = [];
 
-  
     return finalData;
   }
   
@@ -60,6 +59,5 @@ function cleanTemperatureData(data) {
           e.preventDefault();
           link.click()
       })
-      
     };
   });
