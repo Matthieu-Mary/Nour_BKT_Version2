@@ -1,7 +1,9 @@
 // Appliquer des transformations et des nettoyages sur les données ici
 function cleanOxygeneData(data) {
+    console.log(data);
   // Filtre dans un premier temps la data par qualité
   const newDataByQuality = data.filter((item) => parseInt(item.Quality) === 1);
+  console.log(newDataByQuality)
 
   //   Puis par valeur (ici l'oxygène)
   const finalData = [];
@@ -10,7 +12,7 @@ function cleanOxygeneData(data) {
       finalData.push(data[i]);
     }
   }
-
+  console.log(finalData)
   return finalData;
 }
 
@@ -34,7 +36,6 @@ uploadForm.addEventListener("submit", (event) => {
 
   // Vérifier que le fichier a une extension XLS
   if (file.name.substr(-5) !== ".xlsx") {
-    console.log(file.name.substr(-4));
     alert("Veuillez sélectionner un fichier XLSX");
     return;
   }
@@ -52,48 +53,18 @@ uploadForm.addEventListener("submit", (event) => {
     let data = XLSX.utils.sheet_to_json(sheet); // Convertir la feuille de calcul en un tableau d'objets JavaScript
 
     const cleanedData = cleanOxygeneData(data); // Appliquer la fonction de nettoyage
+    console.log(cleanedData);
+
+    const cleanedDataJSON = JSON.stringify(cleanedData); // Convertir les données nettoyées en JSON
 
     //   RECONVERTIR ICI LE FICHIER JSON EN XLSX
     const newWorkbook = XLSX.utils.book_new();
     const newSheet = XLSX.utils.json_to_sheet(cleanedData); // Convertir les données nettoyées en une feuille de calcul
-    XLSX.utils.book_append_sheet(newWorkbook, newSheet, "Données nettoyées"); // Ajouter la feuille de calcul à l'objet Workbook
-    const binaryData = XLSX.write(newWorkbook, {
-      type: "binary",
-      bookType: "xlsx",
-    }); // Convertir l'objet Workbook en fichier binaire
-
-    // Créer un lien pour télécharger le fichier nettoyé
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(new Blob([binaryData]));
-    link.download = "cleaned_oxygene.xslx";
-    // Afficher le bouton de téléchargement et le lie au lien
-    downloadButton.style.display = "inline-block";
-    downloadButton.href = link.href;
-    downloadButton.download = link.download;
-    // Déclenche le téléchargement du fichier nettoyé quand l'utilisateur clique sur le bouton
-    downloadButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      link.click();
-    });
+    
+    XLSX.utils.book_append_sheet(newWorkbook, newSheet, "Oxygène nettoyé"); // Ajouter la feuille de calcul à l'objet Workbook
+    
+    const cleanedDataXlsx = XLSX.writeFileXLSX(newWorkbook, "cleaned_oxygene.xlsx", {compression: true}); // Convertir l'objet Workbook en fichier binaire
   };
 });
 
-//   // Créer un objet Workbook à partir des données nettoyées
-//   const workbook = XLSX.utils.book_new();
-//   const sheet = XLSX.utils.json_to_sheet(cleanedData); // Convertir les données nettoyées en une feuille de calcul
-//   XLSX.utils.book_append_sheet(workbook, sheet, "Données nettoyées"); // Ajouter la feuille de calcul à l'objet Workbook
-//   const binaryData = XLSX.write(workbook, {type: 'binary', bookType: 'xls'}); // Convertir l'objet Workbook en fichier binaire
 
-//   // Créer un lien pour télécharger le fichier nettoyé
-//   const link = document.createElement("a");
-//   link.href = URL.createObjectURL(new Blob([binaryData]));
-//   link.download = "cleaned_oxygene.xls";
-//   // Afficher le bouton de téléchargement et le lie au lien
-//   downloadButton.style.display = "inline-block";
-//   downloadButton.href = link.href;
-//   downloadButton.download = link.download;
-//   // Déclenche le téléchargement du fichier nettoyé quand l'utilisateur clique sur le bouton
-//   downloadButton.addEventListener("click", (e) => {
-//       e.preventDefault();
-//       link.click();
-//   });
