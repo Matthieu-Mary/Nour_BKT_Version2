@@ -4,15 +4,13 @@ async function cleanOxygeneData(data) {
   let newData = data.filter((item) => parseInt(item.Quality) === 1);
   //   Puis par valeur (ici l'oxygène)
   for (let i = 0; i < newData.length - 1; i++) {
-    if (
-      Math.abs(newData[i].OD - newData[i + 1].OD) >= 0.1
-    ) {
-      // Trouver l'index de l'élément à supprimer
-      const indexToRemove = newData.indexOf(newData[i+1]);
-      // Vérifier que l'élément existe dans le tableau
-      if (indexToRemove !== -1) {
-        // Supprimer l'élément à l'index spécifié
-        newData.splice(indexToRemove, 1);
+    if (Math.abs(newData[i].OD - newData[i + 1].OD) >= 0.15) {
+      newData[i + 1].OD = "NV";
+    } else if (newData[i].OD === "NV") {
+      if (Math.abs(newData[i - 1].OD - newData[i + 1].OD) >= 0.15) {
+        newData[i + 1].OD = "NV";
+      } else {
+        newData[i + 1].OD = newData[i + 1].OD;
       }
     }
   }
@@ -26,7 +24,7 @@ const downloadButton = document.getElementById("download-button");
 
 // Gérer la soumission du formulaire
 uploadForm.addEventListener("submit", (event) => {
-  event.preventDefault(); // Empêcher la soumission du formulaire
+  event.preventDefault(); // Empêzcher la soumission du formulaire
 
   // Récupérer le fichier téléchargé
   const file = document.querySelector(".upload-file").files[0];
