@@ -2,20 +2,36 @@
 async function cleanOxygeneData(data) {
   console.log(data);
   // Filtre dans un premier temps la data par qualité
-  let newData = data.filter((item) => parseInt(item.Quality) === 1);
+  let dataByQuality = data.filter((item) => parseInt(item.Quality) === 1);
+
+  const newData = [...dataByQuality];
+
   //   Puis par valeur (ici l'oxygène)
   for (let i = 0; i < newData.length - 1; i++) {
-    if (Math.abs(newData[i].OD - newData[i + 1].OD) >= 0.125) {
-      newData[i + 1].OD = "NV";
-    } else if (newData[i].OD === "NV") {
-      if (Math.abs(newData[i - 1].OD - newData[i + 1].OD) >= 0.125) {
-        newData[i + 1].OD = "NV";
-      } else {
-        newData[i + 1].OD = newData[i + 1].OD;
-      }
+    const tolerance = 0.125;
+    const currentOxygene = newData[i].OD;
+    let nextOxygene = newData[i + 1].OD;
+    const difference = Math.abs(currentOxygene - nextOxygene);
+    if (difference > tolerance) {
+      // Remplacez la valeur de l'oxygène suivant par "NV"
+      nextOxygene = "NV";
     }
+
+    let j = 1;
+    while (nextOxygene === "NV") {
+      j++;
+      nextOxygene = newData[i + j].OD;
+    }
+
+      // Bouclez à travers les valeurs suivantes pour vérifier la limite de tolérance
+      for (let k = 1; k < j; k++) {
+        const difference = Math.abs(currentOxygene - newData[i + k].OD)
+        if (difference > tolerance) {
+          newData[i + k].OD = "NV";
+        }
+      }
   }
-  console.log(newData)
+  console.log(newData);
   return newData;
 }
 
